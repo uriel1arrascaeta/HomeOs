@@ -1,16 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import PostList from './PostList';
-import Home from './home.jsx';
-import PostDetail from './PostDetail';
-import Register from './Register.jsx';
-import Login from './Login.jsx';
-import CreatePost from './CreatePost.jsx';
-import ScheduleAppointment from './ScheduleAppointment.jsx';
-import EditPost from './EditPost.jsx';
-import EditProfilePage from './EditProfilePage.jsx';
-import AdminDashboard from './AdminDashboard.jsx';
-import SellerProfile from './SellerProfile.jsx';
+import PostList from './pages/PostList.jsx';
+import RootPage from './pages/RootPage.jsx'; // Importamos nuestro nuevo componente "decisor"
+import PostDetail from './pages/PostDetail.jsx';
+import Register from './pages/Register.jsx';
+import Login from './pages/Login.jsx';
+import CreatePost from './pages/CreatePost.jsx';
+import ScheduleAppointment from './pages/ScheduleAppointment.jsx';
+import EditPost from './pages/EditPost.jsx';
+import EditProfilePage from './pages/EditProfilePage.jsx';
+import AdminDashboard from './pages/AdminDashboard.jsx';
+import SellerProfile from './pages/SellerProfile.jsx';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           {/* Cada 'Route' mapea una URL ('path') a un componente específico ('element'). */}
           
           {/* Ruta para la página de inicio. */}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<RootPage />} /> {/* Ahora la ruta raíz usa RootPage */}
           {/* Rutas para el registro e inicio de sesión. */}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

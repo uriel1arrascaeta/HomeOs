@@ -1,0 +1,31 @@
+/* frontend/src/pages/HomePage/HomePage.css */
+.home-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    padding: 40px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.property-section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.cards-container {
+    display: flex;
+    gap: 24px;
+    /* Espacio entre las tarjetas */
+    overflow-x: auto;
+    /* Habilita el scroll horizontal */
+    padding-bottom: 20px;
+    /* Espacio para que no se corte la sombra */
+}
