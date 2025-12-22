@@ -37,7 +37,7 @@ export default function Login() {
         },
         // El backend espera 'username' y 'password', y nuestro 'username' es el email.
         body: JSON.stringify({
-          username: formData.email,
+          email: formData.email,
           password: formData.password
         }),
       });
@@ -45,22 +45,18 @@ export default function Login() {
       // Si la respuesta no es exitosa (ej. 400 Bad Request), procesamos el error.
       if (!response.ok) {
         const errorData = await response.json();
-        let errorMessage = 'Email o contraseña incorrectos.';
-        if (errorData.non_field_errors) {
-            const errorString = errorData.non_field_errors.join(', ');
-            errorMessage = errorString;
-        }
-        // Mensaje específico para cuentas de corredor pendientes de aprobación.
-        if (errorData.non_field_errors && errorData.non_field_errors.includes('User account is disabled.')) {
-          errorMessage = 'Tu cuenta de corredor está pendiente de aprobación por un administrador.';
-        }
+        // FastAPI devuelve el error en 'detail', Django en 'non_field_errors'.
+        // Este código ahora maneja ambos casos.
+        const errorMessage = errorData.detail || 
+                             (errorData.non_field_errors ? errorData.non_field_errors.join(', ') : 'Error desconocido.');
+
         throw new Error(errorMessage);
       }
 
       // Si la respuesta es exitosa, obtenemos los datos (token, rol, etc.).
       const data = await response.json();
       // Llamamos a la función 'login' del contexto para guardar la sesión.
-      login(data.token, { role: data.role, first_name: data.first_name }); // Guardamos token y datos de usuario
+      login(data.access_token, { role: data.role, first_name: data.first_name }); // Usamos access_token
       
       // Redirige al usuario a la página correcta según su rol.
       if (data.role === 'admin') {
